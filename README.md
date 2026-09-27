@@ -1,22 +1,5 @@
 # Sistema de Estoque de Produtos
 
-Exercício de implementação em Java: classes abstratas, herança, interfaces, polimorfismo, composição e exceções.
-
-## Estrutura
-
-| Arquivo | Conceito |
-|---|---|
-| `EstoqueException`, `QuantidadeInvalidaException`, `ProdutoIndisponivelException` | Hierarquia de exceções checadas |
-| `Product` | Classe abstrata, encapsulamento, implementa `Vendavel`, sobrecarga de `aplicarDesconto()` |
-| `ProdutoComum`, `ProdutoPerecivel` | Herança e sobrescrita (`@Override`) de `calcularValorTotal()` e `getDescricao()` |
-| `Vendavel` | Interface com `vender()` |
-| `Estoque` | Composição: tem uma `List<Product>`; soma polimórfica do valor total |
-| `EstoqueApp` | `main()` com o cenário de demonstração |
-
-## Como executar
-
-Requer JDK 8 ou superior.
-
 ```bash
 javac -d out src/*.java
 java -cp out EstoqueApp
