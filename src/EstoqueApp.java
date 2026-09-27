@@ -6,12 +6,17 @@ public class EstoqueApp {
     public static void main(String[] args) {
         Estoque estoque = new Estoque();
 
+        Product detergente = null;
+        Product queijo = null;
+
         System.out.println("=== 1. Cadastro de produtos ===");
         try {
+            detergente = new ProdutoComum("Detergente", 3.50, 40);
+            queijo = new ProdutoPerecivel("Queijo Minas", 32.00, 5, 15);
             estoque.adicionarProduto(new ProdutoComum("Arroz 5kg", 25.90, 10));
-            estoque.adicionarProduto(new ProdutoComum("Detergente", 3.50, 40));
+            estoque.adicionarProduto(detergente);
             estoque.adicionarProduto(new ProdutoPerecivel("Leite 1L", 5.00, 20, 2));   // vence em <= 3 dias
-            estoque.adicionarProduto(new ProdutoPerecivel("Queijo Minas", 32.00, 5, 15));
+            estoque.adicionarProduto(queijo);
         } catch (QuantidadeInvalidaException e) {
             System.out.println("Erro inesperado no cadastro: " + e.getMessage());
         }
@@ -40,7 +45,14 @@ public class EstoqueApp {
         }
 
         System.out.println();
-        System.out.println("=== 4. Estoque após as vendas ===");
+        System.out.println("=== 4. Descontos (sobrecarga de aplicarDesconto) ===");
+        detergente.aplicarDesconto(10);          // 10% sem limite
+        System.out.println("aplicarDesconto(10) no Detergente: " + detergente.getDescricao());
+        queijo.aplicarDesconto(50, 5.00);        // 50%, limitado a R$ 5,00
+        System.out.println("aplicarDesconto(50, 5.00) no Queijo Minas: " + queijo.getDescricao());
+
+        System.out.println();
+        System.out.println("=== 5. Estoque final ===");
         estoque.listarProdutos();
         System.out.printf(PT_BR, "Valor total do estoque: R$ %.2f%n", estoque.calcularValorTotalEstoque());
     }
